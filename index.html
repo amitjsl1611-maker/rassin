@@ -870,7 +870,7 @@
           // Fraction of heading above the slide top (0 = all pink, 100 = all black)
           var splitPct = Math.max(0, Math.min(100, (pinkY - _headTop) / _headHh * 100));
           // Pink text color = slightly darker than the slide (#F5C4BB)
-          var pinkTxt = 'rgba(255,255,255,0.5)';
+          var pinkTxt = 'rgba(255,255,255,0.25)';
           heading.style.backgroundImage = 'linear-gradient(to bottom, #0A0A0A ' + splitPct.toFixed(1) + '%, ' + pinkTxt + ' ' + splitPct.toFixed(1) + '%)';
           heading.style.webkitBackgroundClip = 'text';
           heading.style.backgroundClip = 'text';
