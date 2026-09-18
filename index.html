@@ -58,7 +58,8 @@
     color: #0A0A0A;
     white-space: nowrap;
   }
-</style></head><body>
+</style>  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+</head><body>
 <title>RASSIN</title>
 <link rel="icon" type="image/png" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAIAAAAlC+aJAAACZUlEQVR4nO2av2siURDHZ8cDfxyomCJiIUEQTKNYiIqSQkgpCDb+ARZBKxUL21QWgmCnhbWdoEWqiDaxMo2QIsFiFywWQVhjtFG5IvDY6sjdHud94T7VvMfO7H6Zmd33dley2WyEDBM4TOAwgcMEDhM4TOAwgcMEDhM4TOAwgcMEDhM4TOAwgcMEzjcjzul0utfrffHg/X6vaZosy7PZ7OHhYTwen04nAsqA1Wp1u93RaLRQKAyHw+fn51QqBVxCfr9/MBjc3d0B94AkSY1G4+bm5p8QMJ1Ov/8Uj8cTDofL5fLb25vwkiSpXq9jZEDTtNfX13a7HY/HR6ORmA+FQtfX10gltN/v8/n84XAQM7FYDKwHVFV9enoSQ6/Xi9fEsiwL22Kx4AkwmUzC3mw2eAJ8Pp+wF4sFmICrq6tIJPJpn06nyWSCJMDpdHa7XVFC/X5fVdXzLOa+jslkstvtgUDg9vY2n89fXFx8ziuKUqlUjET+YwLi8fjHx8cvuSyXy2w2u1qtjJz3bE38+PgYiUReXl4MxjmbgGQyWSqV9DdTMAFms7larXY6HYNx/tJq1G63ezyeWCxWq9XW67XwyuVymUwGIAPH41HTtPl83mq1EomEvnFzuRxYCSmK0mw2xTAYDOL1gH4/cHl5iSdAURRhWywWZgYTsN1u9UObgW/V5xFwPB53u50YWq1WvOfA+/u7sB0OB54A/SbG7XZjZyCZTOIJ0D/LisViKBQCE6B/K+Fyue7v738vjvT/d5szwwQOEzhM4DCBwwQOEzhM4DCBwwQOEzhM4DCBwwQOEzh87gswyg/YhbVgodQbIgAAAABJRU5ErkJggg==">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -736,9 +737,9 @@
 
 <section class="hero" aria-label="Hero">
   <div class="hero-left">
-    <h1 class="hero-headline">Beauty, Made Personal</h1>
-    <p class="hero-sub">Luxury picks, curated around you.</p>
-    <div class="hero-actions">
+    <h1 class="hero-headline" data-aos="fade-up" data-aos-duration="900">Beauty, Made Personal</h1>
+    <p class="hero-sub" data-aos="fade-up" data-aos-delay="150" data-aos-duration="900">Luxury picks, curated around you.</p>
+    <div class="hero-actions" data-aos="fade-up" data-aos-delay="300" data-aos-duration="900">
       <a href="#" class="cta-primary">Find Your Beauty</a>
     </div>
   </div>
@@ -936,4 +937,12 @@
   });
 </script>
 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+  <script>
+    AOS.init({
+      once: true,
+      easing: "ease-out-cubic",
+      offset: 60
+    });
+  </script>
 </body></html>
