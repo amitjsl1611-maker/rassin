@@ -1,27 +1,11 @@
 <!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}  .story-content {
     position: relative;
-    opacity: 0;
   }
-.story-heading-big {
+.story-heading {
     position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-family: 'Fira Sans Condensed', sans-serif;
-    font-size: 90px;
-    font-weight: 700;
-    line-height: 1.0;
-    letter-spacing: 0.02em;
-    text-transform: uppercase;
-    color: #0A0A0A;
-    white-space: nowrap;
-    z-index: 11;
-    pointer-events: none;
-  }
-  .story-heading {
-    position: absolute;
-    left: 72px;
-    top: calc(50vh - 304px);
+    left: 0;
+    top: 0;
+    transform-origin: top left;
     font-family: 'Fira Sans Condensed', sans-serif;
     font-size: 36px;
     font-weight: 700;
@@ -29,10 +13,20 @@
     letter-spacing: 0.02em;
     text-transform: uppercase;
     color: #0A0A0A;
-    max-width: 260px;
     z-index: 10;
-    opacity: 0;
     pointer-events: none;
+  }
+  .sh-single {
+    display: block;
+    white-space: nowrap;
+  }
+  .sh-double {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    max-width: 260px;
+    opacity: 0;
   }
   .story-subtext-hero {
     position: absolute;
@@ -754,8 +748,7 @@
   <div class="story-slide" data-slide="3"></div>
   <div class="story-slide" data-slide="4"></div>
   <div class="story-sticky">
-  <div class="story-heading-big">DISCOVER YOUR BEAUTY</div>
-  <div class="story-heading">DISCOVER YOUR<br>BEAUTY</div>
+  <div class="story-heading"><span class="sh-single">DISCOVER YOUR BEAUTY</span><span class="sh-double">DISCOVER YOUR<br>BEAUTY</span></div>
   <div class="story-subtext-hero">Personalised beauty, curated around you.</div>
   <div class="story-content">
     <div class="story-img-wrap">
@@ -781,7 +774,8 @@
       var img = document.querySelector('.story-img');
       var overlay = document.querySelector('.story-overlay');
       var heading = document.querySelector('.story-heading');
-      var headingBig = document.querySelector('.story-heading-big');
+      var shSingle = heading ? heading.querySelector('.sh-single') : null;
+      var shDouble = heading ? heading.querySelector('.sh-double') : null;
       var subtextHero = document.querySelector('.story-subtext-hero');
       var content = document.querySelector('.story-content');
       if (!wrap || !img || !overlay) return;
@@ -828,37 +822,36 @@
         var slideIdx = Math.min(Math.floor(rel / viewportH), 4);
         var relWithin = rel - slideIdx * viewportH;
 
-        // ── Heading transition: big centered 90px → small top-left 36px
-        if (heading) {
-          if (_headW === 0) { _headW = heading.offsetWidth; _headH = heading.offsetHeight; }
-        }
+        // ── Heading: one element moves + shrinks, spans crossfade at end
         var t = Math.min(1, rel / viewportH);
         var ease = t < 0.5 ? 2*t*t : -1+(4-2*t)*t;
 
-        // Big heading: fades out + slides toward final top-left position
-        if (headingBig) {
-          var finalCx = 72 + (_headW ? _headW / 2 : 130);
-          var finalCy = viewportH / 2 - 304 + (_headH ? _headH / 2 : 40);
-          var dx = (finalCx - viewportW / 2) * ease;
-          var dy = (finalCy - viewportH / 2) * ease;
-          headingBig.style.transform = 'translate(calc(-50% + ' + dx.toFixed(1) + 'px), calc(-50% + ' + dy.toFixed(1) + 'px))';
-          headingBig.style.opacity = (1 - ease).toFixed(3);
-        }
-
-        // Small heading: fades in at its sticky position
         if (heading) {
-          heading.style.opacity = ease.toFixed(3);
+          if (_headW === 0) { _headW = heading.offsetWidth; _headH = heading.offsetHeight; }
+          // Position interpolates from center to final top-left
+          var s = 2.5 - 1.5 * ease;
+          var X0 = viewportW / 2 - _headW * 1.25;
+          var Y0 = viewportH / 2 - _headH * 1.25;
+          var X = X0 * (1 - ease) + 72 * ease;
+          var Y = Y0 * (1 - ease) + (viewportH / 2 - 304) * ease;
+          heading.style.left = X.toFixed(1) + 'px';
+          heading.style.top = Y.toFixed(1) + 'px';
+          heading.style.transform = 'scale(' + s.toFixed(4) + ')';
+          // Crossfade spans: single-line fades out, two-line fades in (last 25%)
+          var crossT = Math.max(0, Math.min(1, (ease - 0.75) / 0.25));
+          if (shSingle) shSingle.style.opacity = (1 - crossT).toFixed(3);
+          if (shDouble) shDouble.style.opacity = crossT.toFixed(3);
         }
 
-        // ── Subtext: disappear IMMEDIATELY when any scroll begins
+        // ── Subtext: disappear IMMEDIATELY on any scroll
         if (subtextHero) {
           subtextHero.style.opacity = rel > 0 ? '0' : '1';
         }
 
-        // ── Image content: hidden in slide 0, fade in from rel=viewportH/2 → viewportH
+        // ── Image: rises WITH the pink slide (translateY from off-screen to center)
         if (content) {
-          var imgT = Math.max(0, Math.min(1, (rel / viewportH - 0.5) * 2));
-          content.style.opacity = imgT.toFixed(3);
+          var imgTY = Math.max(0, viewportH - rel);
+          content.style.transform = 'translateY(' + imgTY.toFixed(0) + 'px)';
         }
 
         // Swap image only when slide changes (not during the overlay transition)
@@ -872,13 +865,8 @@
           overlay.style.clipPath = 'inset(100% 0 0 0)';
         }
 
-        if (slideIdx >= 1 && slideIdx < 4) {
-          // cp: 0 = overlay hidden, 1 = overlay fully covers image
-          var cp = Math.max(0, Math.min(1, (relWithin - gapBottom) / crossfadeRange));
-          overlay.style.clipPath = 'inset(' + ((1 - cp) * 100).toFixed(2) + '% 0 0 0)';
-        } else {
-          overlay.style.clipPath = 'inset(100% 0 0 0)';
-        }
+        // Overlay disabled — no color wash on image
+        overlay.style.clipPath = 'inset(100% 0 0 0)';
       }
 
       window.addEventListener('resize', function() { _wrapTop = null; _headW = 0; });
