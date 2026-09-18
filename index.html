@@ -10,7 +10,7 @@
     z-index: 10;
     animation: scrollBounce 1.6s ease-in-out infinite;
     pointer-events: none;
-    transition: opacity 0.25s;
+    transition: opacity 0.35s ease;
   }
     .story-content {
     position: relative;
@@ -46,6 +46,7 @@
     white-space: nowrap;
     z-index: 10;
     pointer-events: none;
+    transition: opacity 0.35s ease;
   }
   .story-label-right {
     position: absolute;
@@ -846,18 +847,15 @@
           heading.style.webkitTextFillColor = 'transparent';
         }
 
-        // ── Subtext + scroll hint: disappear IMMEDIATELY on any scroll
+        // ── Subtext + scroll hint: smooth fade over first 100px of scroll
+        var fadeOpacity = Math.max(0, 1 - rel / 100);
         if (subtextHero) {
-          subtextHero.style.opacity = rel > 0 ? '0' : '1';
+          subtextHero.style.opacity = fadeOpacity.toFixed(3);
         }
         if (scrollHint) {
-          if (rel > 0) {
-            scrollHint.style.opacity = '0';
-            scrollHint.style.animation = 'none';
-          } else {
-            scrollHint.style.opacity = '';
-            scrollHint.style.animation = '';
-          }
+          scrollHint.style.opacity = fadeOpacity.toFixed(3);
+          if (fadeOpacity === 0) scrollHint.style.animation = 'none';
+          else scrollHint.style.animation = '';
         }
 
         // ── Image: rises WITH the pink slide
