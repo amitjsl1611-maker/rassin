@@ -850,7 +850,13 @@
           subtextHero.style.opacity = rel > 0 ? '0' : '1';
         }
         if (scrollHint) {
-          scrollHint.style.opacity = rel > 0 ? '0' : '1';
+          if (rel > 0) {
+            scrollHint.style.opacity = '0';
+            scrollHint.style.animation = 'none';
+          } else {
+            scrollHint.style.opacity = '';
+            scrollHint.style.animation = '';
+          }
         }
 
         // ── Image: rises WITH the pink slide
