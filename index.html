@@ -2,11 +2,26 @@
     position: relative;
     opacity: 0;
   }
-.story-heading {
+.story-heading-big {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: 'Fira Sans Condensed', sans-serif;
+    font-size: 90px;
+    font-weight: 700;
+    line-height: 1.0;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    color: #0A0A0A;
+    white-space: nowrap;
+    z-index: 11;
+    pointer-events: none;
+  }
+  .story-heading {
     position: absolute;
     left: 72px;
     top: calc(50vh - 304px);
-    transform-origin: top left;
     font-family: 'Fira Sans Condensed', sans-serif;
     font-size: 36px;
     font-weight: 700;
@@ -16,12 +31,12 @@
     color: #0A0A0A;
     max-width: 260px;
     z-index: 10;
-    will-change: transform;
+    opacity: 0;
     pointer-events: none;
   }
   .story-subtext-hero {
     position: absolute;
-    top: calc(50vh + 88px);
+    top: calc(50vh + 64px);
     left: 50%;
     transform: translateX(-50%);
     font-family: 'Plus Jakarta Sans', sans-serif;
@@ -739,8 +754,9 @@
   <div class="story-slide" data-slide="3"></div>
   <div class="story-slide" data-slide="4"></div>
   <div class="story-sticky">
+  <div class="story-heading-big">DISCOVER YOUR BEAUTY</div>
   <div class="story-heading">DISCOVER YOUR<br>BEAUTY</div>
-  <div class="story-subtext-hero">Personalised beauty,<br>curated around you.</div>
+  <div class="story-subtext-hero">Personalised beauty, curated around you.</div>
   <div class="story-content">
     <div class="story-img-wrap">
       <img class="story-img" src="data:image/jpeg;base64,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" alt="">
@@ -765,6 +781,7 @@
       var img = document.querySelector('.story-img');
       var overlay = document.querySelector('.story-overlay');
       var heading = document.querySelector('.story-heading');
+      var headingBig = document.querySelector('.story-heading-big');
       var subtextHero = document.querySelector('.story-subtext-hero');
       var content = document.querySelector('.story-content');
       if (!wrap || !img || !overlay) return;
@@ -811,25 +828,31 @@
         var slideIdx = Math.min(Math.floor(rel / viewportH), 4);
         var relWithin = rel - slideIdx * viewportH;
 
-        // ── Heading: animate from centered 64px → top-left 36px through slide 0
+        // ── Heading transition: big centered 90px → small top-left 36px
         if (heading) {
           if (_headW === 0) { _headW = heading.offsetWidth; _headH = heading.offsetHeight; }
-          var t = Math.min(1, rel / viewportH);
-          var ease = t < 0.5 ? 2*t*t : -1+(4-2*t)*t;
-          if (ease < 1) {
-            var s = 1 + (64/36 - 1) * (1 - ease);
-            var tx = (viewportW/2 - 72 - _headW * s / 2) * (1 - ease);
-            var ty = (304 - _headH * s / 2) * (1 - ease);
-            heading.style.transform = 'translate('+tx.toFixed(1)+'px,'+ty.toFixed(1)+'px) scale('+s.toFixed(4)+')';
-          } else {
-            heading.style.transform = '';
-          }
+        }
+        var t = Math.min(1, rel / viewportH);
+        var ease = t < 0.5 ? 2*t*t : -1+(4-2*t)*t;
+
+        // Big heading: fades out + slides toward final top-left position
+        if (headingBig) {
+          var finalCx = 72 + (_headW ? _headW / 2 : 130);
+          var finalCy = viewportH / 2 - 304 + (_headH ? _headH / 2 : 40);
+          var dx = (finalCx - viewportW / 2) * ease;
+          var dy = (finalCy - viewportH / 2) * ease;
+          headingBig.style.transform = 'translate(calc(-50% + ' + dx.toFixed(1) + 'px), calc(-50% + ' + dy.toFixed(1) + 'px))';
+          headingBig.style.opacity = (1 - ease).toFixed(3);
         }
 
-        // ── Subtext: fade out in first half of slide 0
+        // Small heading: fades in at its sticky position
+        if (heading) {
+          heading.style.opacity = ease.toFixed(3);
+        }
+
+        // ── Subtext: disappear IMMEDIATELY when any scroll begins
         if (subtextHero) {
-          var subT = Math.min(1, rel / (viewportH * 0.5));
-          subtextHero.style.opacity = (1 - subT).toFixed(3);
+          subtextHero.style.opacity = rel > 0 ? '0' : '1';
         }
 
         // ── Image content: hidden in slide 0, fade in from rel=viewportH/2 → viewportH
