@@ -906,12 +906,14 @@
         // ── Story label: fade in once image settles, fade out as next slide arrives
         if (storyLabel) {
           var labelOp = 0;
-          // Label: fade in as image settles, fade out the moment lavender starts rising
-          if (rel >= viewportH && rel <= viewportH + 350) {
-            var into1 = rel - viewportH;
-            var fIn  = Math.min(1, into1 / 100);          // quick fade-in over 100px
-            var fOut = 1 - Math.max(0, (into1 - 100) / 250); // fade out 100→350px
-            labelOp = Math.min(fIn, Math.max(0, fOut));
+          // Label: appears as image rises, fully gone before lavender is visible
+          var lFadeIn  = viewportH * 0.55;  // start appearing
+          var lPeak    = viewportH * 0.78;  // fully visible
+          var lFadeOut = viewportH * 0.95;  // completely gone
+          if (rel >= lFadeIn && rel <= lFadeOut) {
+            var fIn  = Math.min(1, (rel - lFadeIn) / (lPeak - lFadeIn));
+            var fOut = 1 - Math.max(0, (rel - lPeak) / (lFadeOut - lPeak));
+            labelOp = Math.min(fIn, fOut);
           }
           storyLabel.style.opacity = labelOp.toFixed(3);
         }
