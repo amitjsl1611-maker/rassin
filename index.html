@@ -447,6 +447,7 @@
     width: 495px;
     height: 608px;
     overflow: hidden;
+    cursor: pointer;
   }
   .story-img {
     position: absolute;
@@ -1373,6 +1374,12 @@
   var rqEl = document.getElementById('rq');
   var rqActive = null;
   var rqResponses = {};
+
+  // Story image opens questionnaire
+  var storyImgWrap = document.querySelector('.story-img-wrap');
+  if (storyImgWrap) {
+    storyImgWrap.addEventListener('click', function() { rqOpen(); });
+  }
 
   window.rqOpen = function(){
     rqEl.classList.add('rq-open');
