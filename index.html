@@ -1278,19 +1278,21 @@
       <h2 class="rq-q-h">What best describes<br>your hair?</h2>
       <div class="rq-opts rq-opts-hair" style="display:grid;grid-template-columns:repeat(5,1fr);gap:8px;" data-q="hair_type" data-mode="single">
         <div class="rq-opt-img" data-val="straight" onclick="rqImgSelect(this)">
-          <img src="https://images.unsplash.com/photo-1518715303843-586e8e443082?auto=format&fit=crop&w=400&q=80" alt="">
+          <img src="straight.png" alt="">
           <span class="rq-opt-img-label">STRAIGHT</span>
         </div>
         <div class="rq-opt-img" data-val="wavy" onclick="rqImgSelect(this)">
-          <img src="https://images.unsplash.com/photo-1491895200222-0fc4a4c35e38?auto=format&fit=crop&w=400&q=80" alt="">
+          <img src="wavy.png" alt="">
           <span class="rq-opt-img-label">WAVY</span>
         </div>
         <div class="rq-opt-img" data-val="curly" onclick="rqImgSelect(this)">
-          <img src="https://images.unsplash.com/photo-1590418606746-018423a1eba7?auto=format&fit=crop&w=400&q=80" alt="">
+          <img src="curly.png" alt="">
           <span class="rq-opt-img-label">CURLY</span>
         </div>
-
-        <button class="rq-opt" style="height:100%;min-height:120px;justify-content:flex-end;align-items:flex-start;" data-val="not_sure">NOT<br>SURE</button>
+        <div class="rq-opt-img" data-val="not_sure" onclick="rqImgSelect(this)">
+          <img src="not sure.png" alt="">
+          <span class="rq-opt-img-label">NOT SURE</span>
+        </div>
       </div>
       <div class="rq-nav">
         <button class="rq-back" onclick="rqGoTo('rq-q2')">← Back</button>
