@@ -1179,7 +1179,8 @@
 .rq-done-h{font-family:'Fira Sans Condensed',sans-serif;font-size:52px;font-weight:300;line-height:.98;letter-spacing:-.01em;text-transform:uppercase;color:#0A0A0A;margin:0 0 24px;}
 .rq-done-body{font-family:'Plus Jakarta Sans',sans-serif;font-size:14px;color:#888;line-height:1.7;max-width:360px;margin:0 auto 44px;}
 .rq-deselect-hint{font-family:'Plus Jakarta Sans',sans-serif;font-size:11px;font-style:italic;color:#BDBDBD;margin-top:12px;margin-bottom:0;letter-spacing:0;}
-.rq-done-coming{font-family:'Plus Jakarta Sans',sans-serif;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#BDBDBD;border-top:1px solid #E0E0E0;padding-top:28px;}
+.rq-done-cta{display:inline-flex;align-items:center;gap:12px;font-family:'Plus Jakarta Sans',sans-serif;font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#FAF6F3;background:#0A0A0A;border:none;padding:16px 40px;cursor:pointer;transition:opacity .2s;margin-top:8px;}
+.rq-done-cta:hover{opacity:.8;}
 
 </style>
 
@@ -1363,7 +1364,7 @@
     <p class="rq-done-eyebrow" id="rq-done-eyebrow">Building your profile</p>
     <h2 class="rq-done-h" id="rq-done-h" style="opacity:0;transition:opacity .6s ease .3s;">Your Beauty<br>Profile Is Ready.</h2>
     <p class="rq-done-body" id="rq-done-body" style="opacity:0;transition:opacity .6s ease .5s;">We've noted your preferences. Your personalised beauty experience is being shaped around you.</p>
-    <p class="rq-done-coming" id="rq-done-coming" style="opacity:0;transition:opacity .6s ease .7s;">Your full profile &amp; recommendations — coming soon.</p>
+    <button class="rq-done-cta" id="rq-done-coming" style="opacity:0;transition:opacity .6s ease .7s;" onclick="rqClose()">Explore Your Picks →</button>
   </div>
 
 </div><!-- end rq-modal -->
