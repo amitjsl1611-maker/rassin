@@ -1085,9 +1085,9 @@
 /* ═══ RASSIN QUESTIONNAIRE ═══════════════════════════════════════════════ */
 #rq{position:fixed;inset:0;z-index:1000;opacity:0;pointer-events:none;transition:opacity .4s ease;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.88);}
 #rq.rq-open{opacity:1;pointer-events:all;}
-.rq-screen{position:absolute;inset:0;display:flex;overflow:hidden;opacity:0;pointer-events:none;transition:opacity .35s ease,transform .35s cubic-bezier(.4,0,.2,1);transform:translateY(20px);}
-.rq-screen.rq-active{opacity:1;pointer-events:all;transform:translateY(0);}
-.rq-screen.rq-exit{opacity:0;transform:translateY(-20px);pointer-events:none;position:absolute;}
+.rq-screen{position:absolute;inset:0;display:flex;overflow:hidden;opacity:0;pointer-events:none;transition:opacity .3s ease;}
+.rq-screen.rq-active{opacity:1;pointer-events:all;}
+.rq-screen.rq-exit{opacity:0;pointer-events:none;}
 
 /* Close */
 .rq-modal{position:relative;width:min(1120px,94vw);height:min(720px,90vh);overflow:hidden;box-shadow:0 32px 80px rgba(0,0,0,.45);}
@@ -1402,9 +1402,7 @@
       var old = rqActive;
       setTimeout(function(){ old.classList.remove('rq-exit'); }, 450);
     }
-    next.style.transform = 'translateX(48px)';
     next.classList.add('rq-active');
-    setTimeout(function(){ next.style.transform = ''; }, 10);
     rqActive = next;
   };
 
