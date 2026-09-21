@@ -1096,17 +1096,17 @@
 .rq-x svg{width:16px;height:16px;}
 
 /* ── INTRO ─────────────────────────────────────────────────────────────── */
-.rq-intro{background:#0A0A0A;}
-.rq-intro-img{position:relative;width:48%;flex-shrink:0;}
+.rq-intro{position:relative;background:#0A0A0A;}
+.rq-intro-img{position:absolute;inset:0;}
 .rq-intro-img img{width:100%;height:100%;object-fit:cover;display:block;}
-.rq-intro-img::after{content:'';position:absolute;inset:0;background:linear-gradient(to right,rgba(10,10,10,.18) 0%,transparent 70%);}
-.rq-intro-badge{position:absolute;bottom:16px;left:16px;font-family:'Plus Jakarta Sans',sans-serif;font-size:10px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:rgba(250,246,243,.55);background:rgba(10,10,10,.4);border:1px solid rgba(250,246,243,.15);padding:6px 10px;}
-.rq-intro-r{width:52%;display:flex;flex-direction:column;justify-content:center;padding:60px 68px;background:#0A0A0A;color:#FAF6F3;}
-.rq-intro-eyebrow{font-family:'Plus Jakarta Sans',sans-serif;font-size:11px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:rgba(250,246,243,.45);margin-bottom:24px;}
-.rq-intro-h{font-family:'Fira Sans Condensed',sans-serif;font-size:64px;font-weight:300;line-height:.95;letter-spacing:-.01em;text-transform:uppercase;color:#FAF6F3;margin:0 0 32px;}
-.rq-intro-body{font-family:'Plus Jakarta Sans',sans-serif;font-size:14px;font-weight:400;line-height:1.7;color:rgba(250,246,243,.65);margin:0 0 18px;max-width:340px;}
-.rq-micro{font-family:'Plus Jakarta Sans',sans-serif;font-size:11px;letter-spacing:.06em;color:rgba(250,246,243,.35);margin-bottom:44px;}
-.rq-begin{display:inline-flex;align-items:center;gap:12px;font-family:'Plus Jakarta Sans',sans-serif;font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#0A0A0A;background:#FAF6F3;border:none;padding:16px 32px;cursor:pointer;transition:opacity .2s;}
+.rq-intro-img::after{content:'';position:absolute;inset:0;background:rgba(0,0,0,.30);}
+.rq-intro-badge{position:absolute;bottom:16px;left:16px;font-family:'Plus Jakarta Sans',sans-serif;font-size:10px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:rgba(250,246,243,.55);background:rgba(10,10,10,.4);border:1px solid rgba(250,246,243,.15);padding:6px 10px;z-index:2;}
+.rq-intro-r{position:relative;z-index:2;width:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:60px 80px;text-align:center;color:#FAF6F3;}
+.rq-intro-eyebrow{font-family:'Plus Jakarta Sans',sans-serif;font-size:11px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:rgba(250,246,243,.60);margin-bottom:24px;}
+.rq-intro-h{font-family:'Fira Sans Condensed',sans-serif;font-size:72px;font-weight:300;line-height:.95;letter-spacing:-.01em;text-transform:uppercase;color:#FAF6F3;margin:0 0 32px;}
+.rq-intro-body{font-family:'Plus Jakarta Sans',sans-serif;font-size:15px;font-weight:400;line-height:1.7;color:rgba(250,246,243,.75);margin:0 0 18px;max-width:420px;}
+.rq-micro{font-family:'Plus Jakarta Sans',sans-serif;font-size:11px;letter-spacing:.06em;color:rgba(250,246,243,.45);margin-bottom:44px;}
+.rq-begin{display:inline-flex;align-items:center;gap:12px;font-family:'Plus Jakarta Sans',sans-serif;font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#0A0A0A;background:#FAF6F3;border:none;padding:16px 40px;cursor:pointer;transition:opacity .2s;}
 .rq-begin:hover{opacity:.85;}
 
 /* ── QUESTION SCREENS ──────────────────────────────────────────────────── */
@@ -1187,9 +1187,9 @@
   <!-- ── INTRO ─────────────────────────────────────────────────────────── -->
   <div class="rq-screen rq-intro" id="rq-intro">
     <div class="rq-intro-img">
-      <img src="https://images.unsplash.com/photo-1596462502278-27bfdc403348?auto=format&fit=crop&w=1200&q=80" alt="Editorial beauty">
-      <span class="rq-intro-badge">YOUR BEAUTY JOURNEY</span>
+      <img src="modal cover.png" alt="Your beauty journey">
     </div>
+    <span class="rq-intro-badge">YOUR BEAUTY JOURNEY</span>
     <div class="rq-intro-r">
       <p class="rq-intro-eyebrow">Your beauty, understood.</p>
       <h1 class="rq-intro-h">Let's make<br>it personal.</h1>
