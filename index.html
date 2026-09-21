@@ -1090,13 +1090,13 @@
 .rq-screen.rq-exit{opacity:0;transform:translateY(-20px);pointer-events:none;position:absolute;}
 
 /* Close */
-.rq-modal{position:relative;width:1120px;height:720px;max-width:96vw;max-height:92vh;overflow:hidden;box-shadow:0 32px 80px rgba(0,0,0,.45);}
+.rq-modal{position:relative;width:min(1120px,94vw);height:min(720px,90vh);overflow:hidden;box-shadow:0 32px 80px rgba(0,0,0,.45);}
 .rq-x{position:absolute;top:10px;right:10px;z-index:1100;background:none;border:none;width:30px;height:30px;cursor:pointer;display:flex;align-items:center;justify-content:center;opacity:.45;transition:opacity .2s;}
 .rq-x:hover{opacity:1;}
 .rq-x svg{width:16px;height:16px;}
 
 /* ── INTRO ─────────────────────────────────────────────────────────────── */
-.rq-intro{position:relative;background:#0A0A0A;}
+.rq-intro{background:#0A0A0A;}
 .rq-intro::before{content:'';position:absolute;inset:-20px;background:url('modal cover.png') center/cover no-repeat;filter:blur(5px);z-index:0;}
 .rq-intro::after{content:'';position:absolute;inset:0;background:rgba(0,0,0,.35);z-index:1;}
 .rq-intro-badge{position:absolute;bottom:16px;left:16px;font-family:'Plus Jakarta Sans',sans-serif;font-size:10px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:rgba(250,246,243,.55);background:rgba(10,10,10,.4);border:1px solid rgba(250,246,243,.15);padding:6px 10px;z-index:2;}
