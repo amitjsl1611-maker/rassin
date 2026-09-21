@@ -96,6 +96,36 @@
     color: #B03058;
     white-space: nowrap;
   }
+  .slr-cta {
+    display: inline-block;
+    margin-top: 14px;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: inherit;
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    position: relative;
+    white-space: nowrap;
+    pointer-events: all;
+  }
+  .slr-cta::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -2px;
+    width: 100%;
+    height: 1.5px;
+    background: currentColor;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform .35s ease;
+  }
+  .slr-cta:hover::after { transform: scaleX(1); }
 </style>  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
 </head><body>
 <title>RASSIN</title>
@@ -817,14 +847,17 @@
     <div class="story-label-right">
       <div class="slr-title">MY HAIR</div>
       <div class="slr-sub">Know your hair.<br>Build a routine that fits.</div>
+      <button class="slr-cta" onclick="rqOpen()">Discover Yours →</button>
     </div>
     <div class="story-label-skin">
       <div class="slr-title">MY SKIN</div>
       <div class="slr-sub">Understand your skin.<br>Find what works for you.</div>
+      <button class="slr-cta" onclick="rqOpen()">Discover Yours →</button>
     </div>
     <div class="story-label-beauty">
       <div class="slr-title">MY BEAUTY</div>
       <div class="slr-sub">Bring it all together.<br>Discover your beauty profile.</div>
+      <button class="slr-cta" onclick="rqOpen()">Discover Yours →</button>
     </div>
   </div>
 </div>
