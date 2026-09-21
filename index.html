@@ -1180,6 +1180,12 @@
 .rq-done-h{font-family:'Fira Sans Condensed',sans-serif;font-size:52px;font-weight:300;line-height:.98;letter-spacing:-.01em;text-transform:uppercase;color:#0A0A0A;margin:0 0 24px;}
 .rq-done-body{font-family:'Plus Jakarta Sans',sans-serif;font-size:14px;color:#888;line-height:1.7;max-width:360px;margin:0 auto 44px;}
 .rq-deselect-hint{font-family:'Plus Jakarta Sans',sans-serif;font-size:11px;font-style:italic;color:#BDBDBD;margin-top:12px;margin-bottom:0;letter-spacing:0;}
+.rq-done-loading{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;background:#FAF6F3;transition:opacity .6s ease;z-index:2;}
+.rq-done-loading-label{font-family:'Plus Jakarta Sans',sans-serif;font-size:11px;font-weight:500;letter-spacing:.22em;text-transform:uppercase;color:#BDBDBD;margin-bottom:32px;}
+.rq-done-loading-bar{width:120px;height:1px;background:#E8E8E8;position:relative;overflow:hidden;}
+.rq-done-loading-bar::after{content:'';position:absolute;left:-100%;top:0;height:100%;width:100%;background:#0A0A0A;animation:rq-compile 1.8s cubic-bezier(.4,0,.2,1) forwards;}
+@keyframes rq-compile{0%{left:-100%;}100%{left:0%;}}
+.rq-done-loading-h{font-family:'Fira Sans Condensed',sans-serif;font-size:52px;font-weight:300;line-height:.98;letter-spacing:-.01em;text-transform:uppercase;color:#0A0A0A;text-align:center;margin-top:40px;opacity:0;transition:opacity .5s ease .2s;}
 .rq-done-cta{display:inline-flex;align-items:center;gap:12px;font-family:'Plus Jakarta Sans',sans-serif;font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#FAF6F3;background:#0A0A0A;border:none;padding:16px 40px;cursor:pointer;transition:opacity .2s;margin-top:8px;}
 .rq-done-cta:hover{opacity:.8;}
 
@@ -1361,6 +1367,12 @@
 
   <!-- ── COMPLETION ────────────────────────────────────────────────────── -->
   <div class="rq-screen rq-done" id="rq-done">
+    <!-- Loading phase -->
+    <div class="rq-done-loading" id="rq-loading-phase">
+      <p class="rq-done-loading-label">Compiling your preferences</p>
+      <div class="rq-done-loading-bar"></div>
+      <h2 class="rq-done-loading-h" id="rq-loading-h">Almost there...</h2>
+    </div>
     <div class="rq-done-loader" id="rq-loader"></div>
     <p class="rq-done-eyebrow" id="rq-done-eyebrow" style="display:none;">Building your profile</p>
     <h2 class="rq-done-h" id="rq-done-h" style="opacity:0;transition:opacity .6s ease .3s;">Your Beauty<br>Profile Is Ready.</h2>
@@ -1478,19 +1490,22 @@
 
   window.rqComplete = function(){
     rqGoTo('rq-done');
-    // Animate: loader runs, then reveal text
+    var loadingPhase = document.getElementById('rq-loading-phase');
+    var loadingH = document.getElementById('rq-loading-h');
+    var loader = document.getElementById('rq-loader');
+    var h = document.getElementById('rq-done-h');
+    var b = document.getElementById('rq-done-body');
+    var c = document.getElementById('rq-done-coming');
+    // Show "almost there" text mid-way
+    setTimeout(function(){ if(loadingH) loadingH.style.opacity = '1'; }, 900);
+    // Crossfade to ready screen
     setTimeout(function(){
-      var loader = document.getElementById('rq-loader');
-      var ey = document.getElementById('rq-done-eyebrow');
-      var h = document.getElementById('rq-done-h');
-      var b = document.getElementById('rq-done-body');
-      var c = document.getElementById('rq-done-coming');
+      if(loadingPhase){ loadingPhase.style.opacity = '0'; loadingPhase.style.pointerEvents = 'none'; }
       if(loader) loader.style.display = 'none';
-      if(ey) ey.textContent = 'Done.';
       if(h) h.style.opacity = '1';
       if(b) b.style.opacity = '1';
       if(c) c.style.opacity = '1';
-    }, 2200);
+    }, 2400);
   };
 
   // Tab options (Q5 style)
