@@ -906,13 +906,10 @@
         // ── Story label: fade in once image settles, fade out as next slide arrives
         if (storyLabel) {
           var labelOp = 0;
-          // Fade in: 60px ease-in the moment image settles (rel = vh)
+          // Fade IN: 60px after image settles
           var lIn = Math.max(0, Math.min(1, (rel - viewportH) / 60));
-          // Fade out: start when lavender reaches image bottom, gone 200px later
-          var lLavY = 2 * viewportH - rel;
-          var lImgTop = _imgTopCache >= 0 ? _imgTopCache : (viewportH - IMG_H) / 2;
-          var lImgBot = lImgTop + IMG_H;
-          var lOut = lLavY >= lImgBot ? 1 : Math.max(0, (lLavY - (lImgBot - 200)) / 200);
+          // Fade OUT: start when lavender is 100px into viewport, gone 200px later
+          var lOut = Math.max(0, Math.min(1, 1 - (rel - (viewportH + 100)) / 200));
           labelOp = Math.min(lIn, lOut);
           storyLabel.style.opacity = labelOp.toFixed(3);
         }
