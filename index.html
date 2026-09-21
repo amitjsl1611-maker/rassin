@@ -1085,7 +1085,7 @@
 /* ═══ RASSIN QUESTIONNAIRE ═══════════════════════════════════════════════ */
 #rq{position:fixed;inset:0;z-index:1000;opacity:0;pointer-events:none;transition:opacity .4s ease;display:flex;align-items:center;justify-content:center;background:rgba(10,10,10,.55);backdrop-filter:blur(4px);}
 #rq.rq-open{opacity:1;pointer-events:all;}
-.rq-screen{position:absolute;inset:0;display:flex;opacity:0;pointer-events:none;transition:opacity .35s ease,transform .35s cubic-bezier(.4,0,.2,1);transform:translateY(20px);}
+.rq-screen{position:absolute;inset:0;display:flex;overflow:hidden;opacity:0;pointer-events:none;transition:opacity .35s ease,transform .35s cubic-bezier(.4,0,.2,1);transform:translateY(20px);}
 .rq-screen.rq-active{opacity:1;pointer-events:all;transform:translateY(0);}
 .rq-screen.rq-exit{opacity:0;transform:translateY(-20px);pointer-events:none;position:absolute;}
 
@@ -1097,8 +1097,8 @@
 
 /* ── INTRO ─────────────────────────────────────────────────────────────── */
 .rq-intro{position:relative;background:#0A0A0A;}
-.rq-intro-img{position:absolute;inset:0;}
-.rq-intro-img img{width:100%;height:100%;object-fit:cover;display:block;}
+.rq-intro-img{position:absolute;top:0;left:0;width:100%;height:100%;}
+.rq-intro-img img{width:100%;height:100%;object-fit:cover;display:block;filter:blur(4px);transform:scale(1.06);}
 .rq-intro-img::after{content:'';position:absolute;inset:0;background:rgba(0,0,0,.30);}
 .rq-intro-badge{position:absolute;bottom:16px;left:16px;font-family:'Plus Jakarta Sans',sans-serif;font-size:10px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:rgba(250,246,243,.55);background:rgba(10,10,10,.4);border:1px solid rgba(250,246,243,.15);padding:6px 10px;z-index:2;}
 .rq-intro-r{position:relative;z-index:2;width:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:60px 80px;text-align:center;color:#FAF6F3;}
@@ -1189,11 +1189,9 @@
     <div class="rq-intro-img">
       <img src="modal cover.png" alt="Your beauty journey">
     </div>
-    <span class="rq-intro-badge">YOUR BEAUTY JOURNEY</span>
     <div class="rq-intro-r">
-      <p class="rq-intro-eyebrow">Your beauty, understood.</p>
-      <h1 class="rq-intro-h">Let's make<br>it personal.</h1>
-      <p class="rq-intro-body">Tell us a little about you. We'll use it to make your beauty discovery more relevant to you.</p>
+      <h1 class="rq-intro-h">Let's get to<br>know you.</h1>
+      <p class="rq-intro-body">A few simple questions to help us understand your skin, hair and beauty needs.</p>
       <p class="rq-micro">5 questions &nbsp;·&nbsp; Less than a minute</p>
       <button class="rq-begin" onclick="rqGoTo('rq-q1')">LET'S BEGIN <span>→</span></button>
     </div>
