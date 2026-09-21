@@ -791,7 +791,7 @@
     <h1 class="hero-headline" data-aos="fade-up" data-aos-duration="900">Beauty,<br>Made Personal</h1>
     <p class="hero-sub" data-aos="fade-up" data-aos-delay="150" data-aos-duration="900">Luxury picks, curated around you.</p>
     <div class="hero-actions" data-aos="fade-up" data-aos-delay="300" data-aos-duration="900">
-      <a href="#" class="cta-primary">Find Your Beauty</a>
+      <a href="#" class="cta-primary" onclick="rqOpen();return false;">Discover My Beauty</a>
     </div>
   </div>
 </section>
@@ -1080,4 +1080,423 @@
       offset: 60
     });
   </script>
+
+<style>
+/* ═══ RASSIN QUESTIONNAIRE ═══════════════════════════════════════════════ */
+#rq{position:fixed;inset:0;z-index:1000;opacity:0;pointer-events:none;transition:opacity .5s ease;}
+#rq.rq-open{opacity:1;pointer-events:all;}
+.rq-screen{position:absolute;inset:0;display:flex;opacity:0;pointer-events:none;transition:opacity .4s ease,transform .4s cubic-bezier(.4,0,.2,1);transform:translateX(48px);}
+.rq-screen.rq-active{opacity:1;pointer-events:all;transform:translateX(0);}
+.rq-screen.rq-exit{opacity:0;transform:translateX(-48px);pointer-events:none;}
+
+/* Close */
+.rq-x{position:fixed;top:24px;right:28px;z-index:1100;background:none;border:none;width:36px;height:36px;cursor:pointer;display:flex;align-items:center;justify-content:center;opacity:.5;transition:opacity .2s;}
+.rq-x:hover{opacity:1;}
+.rq-x svg{width:16px;height:16px;}
+
+/* ── INTRO ─────────────────────────────────────────────────────────────── */
+.rq-intro{background:#0A0A0A;}
+.rq-intro-img{position:relative;width:52%;flex-shrink:0;}
+.rq-intro-img img{width:100%;height:100%;object-fit:cover;display:block;}
+.rq-intro-img::after{content:'';position:absolute;inset:0;background:linear-gradient(to right,rgba(10,10,10,.18) 0%,transparent 70%);}
+.rq-intro-badge{position:absolute;bottom:28px;left:28px;font-family:'Plus Jakarta Sans',sans-serif;font-size:11px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:rgba(250,246,243,.55);background:rgba(10,10,10,.4);border:1px solid rgba(250,246,243,.15);padding:8px 14px;}
+.rq-intro-r{width:48%;display:flex;flex-direction:column;justify-content:center;padding:80px 72px;background:#0A0A0A;color:#FAF6F3;}
+.rq-intro-eyebrow{font-family:'Plus Jakarta Sans',sans-serif;font-size:11px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:rgba(250,246,243,.45);margin-bottom:32px;}
+.rq-intro-h{font-family:'Fira Sans Condensed',sans-serif;font-size:72px;font-weight:300;line-height:.95;letter-spacing:-.01em;text-transform:uppercase;color:#FAF6F3;margin:0 0 36px;}
+.rq-intro-body{font-family:'Plus Jakarta Sans',sans-serif;font-size:16px;font-weight:400;line-height:1.65;color:rgba(250,246,243,.65);margin:0 0 16px;max-width:320px;}
+.rq-micro{font-family:'Plus Jakarta Sans',sans-serif;font-size:12px;letter-spacing:.06em;color:rgba(250,246,243,.35);margin-bottom:52px;}
+.rq-begin{display:inline-flex;align-items:center;gap:14px;font-family:'Plus Jakarta Sans',sans-serif;font-size:13px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#0A0A0A;background:#FAF6F3;border:none;padding:18px 36px;cursor:pointer;transition:opacity .2s;}
+.rq-begin:hover{opacity:.85;}
+
+/* ── QUESTION SCREENS ──────────────────────────────────────────────────── */
+.rq-q{background:#fff;}
+.rq-q-img{position:relative;width:50%;flex-shrink:0;}
+.rq-q-img img{width:100%;height:100%;object-fit:cover;display:block;}
+.rq-q-img-badge{position:absolute;bottom:28px;left:28px;font-family:'Plus Jakarta Sans',sans-serif;font-size:11px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:rgba(250,246,243,.6);background:rgba(10,10,10,.35);border:1px solid rgba(250,246,243,.15);padding:7px 13px;}
+.rq-q-r{width:50%;display:flex;flex-direction:column;padding:48px 64px 48px 60px;overflow-y:auto;}
+
+/* Stepper */
+.rq-stepper{display:flex;align-items:center;gap:14px;margin-bottom:52px;}
+.rq-step-no{font-family:'Plus Jakarta Sans',sans-serif;font-size:11px;font-weight:600;letter-spacing:.14em;color:#0A0A0A;white-space:nowrap;}
+.rq-step-track{flex:1;height:1px;background:#E8E8E8;position:relative;}
+.rq-step-fill{position:absolute;left:0;top:0;height:100%;background:#0A0A0A;transition:width .4s ease;}
+.rq-step-of{font-family:'Plus Jakarta Sans',sans-serif;font-size:11px;font-weight:500;letter-spacing:.1em;color:#BDBDBD;white-space:nowrap;}
+
+/* Question copy */
+.rq-q-eyebrow{font-family:'Plus Jakarta Sans',sans-serif;font-size:11px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:#BDBDBD;margin-bottom:20px;}
+.rq-q-h{font-family:'Fira Sans Condensed',sans-serif;font-size:42px;font-weight:300;line-height:1.0;letter-spacing:-.01em;text-transform:uppercase;color:#0A0A0A;margin:0 0 10px;}
+.rq-q-sub{font-family:'Plus Jakarta Sans',sans-serif;font-size:13px;color:#999;margin-bottom:36px;letter-spacing:.03em;}
+
+/* Option grids */
+.rq-opts{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:auto;}
+.rq-opts.rq-grid-3{display:grid;grid-template-columns:repeat(3,1fr);}
+.rq-opts.rq-grid-2{display:grid;grid-template-columns:repeat(2,1fr);}
+.rq-opts.rq-col{flex-direction:column;gap:8px;}
+
+/* Text option */
+.rq-opt{font-family:'Plus Jakarta Sans',sans-serif;font-size:12px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:#0A0A0A;background:#fff;border:1px solid #E0E0E0;padding:16px 20px;cursor:pointer;text-align:left;transition:border-color .15s,background .15s;display:flex;flex-direction:column;gap:5px;}
+.rq-opt:hover{border-color:#AAAAAA;}
+.rq-opt.sel{border-color:#0A0A0A;background:#0A0A0A;color:#FAF6F3;}
+.rq-opt-sub{font-size:11px;font-weight:400;letter-spacing:.04em;text-transform:none;opacity:.65;}
+
+/* Image option */
+.rq-opt-img{position:relative;border:2px solid transparent;cursor:pointer;transition:border-color .15s;overflow:hidden;aspect-ratio:3/4;}
+.rq-opt-img img{width:100%;height:100%;object-fit:cover;display:block;}
+.rq-opt-img-label{position:absolute;bottom:0;left:0;right:0;padding:12px 14px;background:rgba(10,10,10,.45);font-family:'Plus Jakarta Sans',sans-serif;font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#FAF6F3;}
+.rq-opt-img:hover{border-color:#AAAAAA;}
+.rq-opt-img.sel{border-color:#0A0A0A;}
+.rq-opt-img.sel .rq-opt-img-label{background:rgba(10,10,10,.75);}
+
+/* Hair image cards - wider aspect */
+.rq-opts-hair .rq-opt-img{aspect-ratio:3/4;}
+
+/* Style image cards */
+.rq-opts-style{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;}
+.rq-opts-style .rq-opt-img{aspect-ratio:2/3;}
+
+/* Nav */
+.rq-nav{display:flex;justify-content:space-between;align-items:center;padding-top:36px;margin-top:auto;}
+.rq-back{font-family:'Plus Jakarta Sans',sans-serif;font-size:12px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:#AAAAAA;background:none;border:none;cursor:pointer;transition:color .2s;padding:0;}
+.rq-back:hover{color:#0A0A0A;}
+.rq-next{font-family:'Plus Jakarta Sans',sans-serif;font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#FAF6F3;background:#0A0A0A;border:none;padding:16px 32px;cursor:pointer;display:flex;align-items:center;gap:12px;transition:opacity .2s;}
+.rq-next:hover{opacity:.8;}
+.rq-next:disabled{opacity:.3;cursor:default;}
+
+/* ── COMPLETION ────────────────────────────────────────────── */
+.rq-done{background:#FAF6F3;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:60px;}
+.rq-done-loader{width:48px;height:2px;background:#E0E0E0;position:relative;margin:0 auto 60px;overflow:hidden;}
+.rq-done-loader::after{content:'';position:absolute;left:-100%;top:0;height:100%;width:100%;background:#0A0A0A;animation:rq-load 1.6s ease-in-out infinite;}
+@keyframes rq-load{0%{left:-100%;}100%{left:100%;}}
+.rq-done-eyebrow{font-family:'Plus Jakarta Sans',sans-serif;font-size:11px;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:#BDBDBD;margin-bottom:24px;}
+.rq-done-h{font-family:'Fira Sans Condensed',sans-serif;font-size:60px;font-weight:300;line-height:.98;letter-spacing:-.01em;text-transform:uppercase;color:#0A0A0A;margin:0 0 28px;}
+.rq-done-body{font-family:'Plus Jakarta Sans',sans-serif;font-size:15px;color:#888;line-height:1.65;max-width:380px;margin:0 auto 52px;}
+.rq-done-coming{font-family:'Plus Jakarta Sans',sans-serif;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#BDBDBD;border-top:1px solid #E0E0E0;padding-top:28px;}
+</style>
+
+<!-- ═══ RASSIN QUESTIONNAIRE OVERLAY ═══════════════════════════════════════ -->
+<div id="rq">
+
+  <!-- CLOSE -->
+  <button class="rq-x" onclick="rqClose()" aria-label="Close">
+    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4">
+      <path d="M2 2l12 12M14 2L2 14"/>
+    </svg>
+  </button>
+
+  <!-- ── INTRO ─────────────────────────────────────────────────────────── -->
+  <div class="rq-screen rq-intro" id="rq-intro">
+    <div class="rq-intro-img">
+      <img src="https://images.unsplash.com/photo-1596462502278-27bfdc403348?auto=format&fit=crop&w=1200&q=80" alt="Editorial beauty">
+      <span class="rq-intro-badge">YOUR BEAUTY JOURNEY</span>
+    </div>
+    <div class="rq-intro-r">
+      <p class="rq-intro-eyebrow">Your beauty, understood.</p>
+      <h1 class="rq-intro-h">Let's make<br>it personal.</h1>
+      <p class="rq-intro-body">Tell us a little about you. We'll use it to make your beauty discovery more relevant to you.</p>
+      <p class="rq-micro">5 questions &nbsp;·&nbsp; Less than a minute</p>
+      <button class="rq-begin" onclick="rqGoTo('rq-q1')">LET'S BEGIN <span>→</span></button>
+    </div>
+  </div>
+
+  <!-- ── Q1: SKIN TYPE ─────────────────────────────────────────────────── -->
+  <div class="rq-screen rq-q" id="rq-q1">
+    <div class="rq-q-img">
+      <img src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&w=900&q=80" alt="">
+      <span class="rq-q-img-badge">01 / SKIN</span>
+    </div>
+    <div class="rq-q-r">
+      <div class="rq-stepper">
+        <span class="rq-step-no">01</span>
+        <div class="rq-step-track"><div class="rq-step-fill" style="width:20%"></div></div>
+        <span class="rq-step-of">05</span>
+      </div>
+      <p class="rq-q-eyebrow">01 / Your Skin</p>
+      <h2 class="rq-q-h">What best describes<br>your skin?</h2>
+      <div class="rq-opts rq-grid-3" data-q="skin_type" data-mode="single">
+        <button class="rq-opt" data-val="dry">DRY</button>
+        <button class="rq-opt" data-val="normal">NORMAL</button>
+        <button class="rq-opt" data-val="combination">COMBINATION</button>
+        <button class="rq-opt" data-val="oily">OILY</button>
+        <button class="rq-opt" data-val="sensitive">SENSITIVE</button>
+        <button class="rq-opt" data-val="not_sure">NOT SURE</button>
+      </div>
+      <div class="rq-nav">
+        <button class="rq-back" onclick="rqGoTo('rq-intro')">← Back</button>
+        <button class="rq-next" id="rq-q1-next" onclick="rqGoTo('rq-q2')" disabled>Continue →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Q2: SKIN GOALS ────────────────────────────────────────────────── -->
+  <div class="rq-screen rq-q" id="rq-q2">
+    <div class="rq-q-img">
+      <img src="https://images.unsplash.com/photo-1571781926291-c477ebfd024b?auto=format&fit=crop&w=900&q=80" alt="">
+      <span class="rq-q-img-badge">02 / SKIN</span>
+    </div>
+    <div class="rq-q-r">
+      <div class="rq-stepper">
+        <span class="rq-step-no">02</span>
+        <div class="rq-step-track"><div class="rq-step-fill" style="width:40%"></div></div>
+        <span class="rq-step-of">05</span>
+      </div>
+      <p class="rq-q-eyebrow">02 / Your Skin</p>
+      <h2 class="rq-q-h">What would you most<br>like to improve?</h2>
+      <p class="rq-q-sub">Choose up to 3.</p>
+      <div class="rq-opts rq-grid-3" data-q="skin_goals" data-mode="multi" data-max="3">
+        <button class="rq-opt" data-val="glow">GLOW<span class="rq-opt-sub">Radiance &amp; luminosity</span></button>
+        <button class="rq-opt" data-val="hydration">HYDRATION<span class="rq-opt-sub">Moisture &amp; plumpness</span></button>
+        <button class="rq-opt" data-val="texture">TEXTURE<span class="rq-opt-sub">Smoothness &amp; tone</span></button>
+        <button class="rq-opt" data-val="dark_spots">DARK SPOTS<span class="rq-opt-sub">Uneven pigment</span></button>
+        <button class="rq-opt" data-val="breakouts">BREAKOUTS<span class="rq-opt-sub">Blemishes &amp; acne</span></button>
+        <button class="rq-opt" data-val="fine_lines">FINE LINES<span class="rq-opt-sub">Ageing &amp; firmness</span></button>
+      </div>
+      <div class="rq-nav">
+        <button class="rq-back" onclick="rqGoTo('rq-q1')">← Back</button>
+        <button class="rq-next" id="rq-q2-next" onclick="rqGoTo('rq-q3')" disabled>Continue →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Q3: HAIR TYPE ─────────────────────────────────────────────────── -->
+  <div class="rq-screen rq-q" id="rq-q3">
+    <div class="rq-q-img">
+      <img src="https://images.unsplash.com/photo-1527474305487-b87b222841cc?auto=format&fit=crop&w=900&q=80" alt="">
+      <span class="rq-q-img-badge">03 / HAIR</span>
+    </div>
+    <div class="rq-q-r">
+      <div class="rq-stepper">
+        <span class="rq-step-no">03</span>
+        <div class="rq-step-track"><div class="rq-step-fill" style="width:60%"></div></div>
+        <span class="rq-step-of">05</span>
+      </div>
+      <p class="rq-q-eyebrow">03 / Your Hair</p>
+      <h2 class="rq-q-h">What best describes<br>your hair?</h2>
+      <div class="rq-opts rq-opts-hair" style="display:grid;grid-template-columns:repeat(5,1fr);gap:8px;" data-q="hair_type" data-mode="single">
+        <div class="rq-opt-img" data-val="straight" onclick="rqImgSelect(this)">
+          <img src="https://images.unsplash.com/photo-1518715303843-586e8e443082?auto=format&fit=crop&w=400&q=80" alt="">
+          <span class="rq-opt-img-label">STRAIGHT</span>
+        </div>
+        <div class="rq-opt-img" data-val="wavy" onclick="rqImgSelect(this)">
+          <img src="https://images.unsplash.com/photo-1491895200222-0fc4a4c35e38?auto=format&fit=crop&w=400&q=80" alt="">
+          <span class="rq-opt-img-label">WAVY</span>
+        </div>
+        <div class="rq-opt-img" data-val="curly" onclick="rqImgSelect(this)">
+          <img src="https://images.unsplash.com/photo-1590418606746-018423a1eba7?auto=format&fit=crop&w=400&q=80" alt="">
+          <span class="rq-opt-img-label">CURLY</span>
+        </div>
+        <div class="rq-opt-img" data-val="coily" onclick="rqImgSelect(this)">
+          <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80" alt="">
+          <span class="rq-opt-img-label">COILY</span>
+        </div>
+        <button class="rq-opt" style="height:100%;min-height:120px;justify-content:flex-end;align-items:flex-start;" data-val="not_sure">NOT<br>SURE</button>
+      </div>
+      <div class="rq-nav">
+        <button class="rq-back" onclick="rqGoTo('rq-q2')">← Back</button>
+        <button class="rq-next" id="rq-q3-next" onclick="rqGoTo('rq-q4')" disabled>Continue →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Q4: BEAUTY INTENT ──────────────────────────────────────────────── -->
+  <div class="rq-screen rq-q" id="rq-q4">
+    <div class="rq-q-img">
+      <img src="https://images.unsplash.com/photo-1596704017248-ed27a75b1dc9?auto=format&fit=crop&w=900&q=80" alt="">
+      <span class="rq-q-img-badge">04 / BEAUTY</span>
+    </div>
+    <div class="rq-q-r">
+      <div class="rq-stepper">
+        <span class="rq-step-no">04</span>
+        <div class="rq-step-track"><div class="rq-step-fill" style="width:80%"></div></div>
+        <span class="rq-step-of">05</span>
+      </div>
+      <p class="rq-q-eyebrow">04 / Your Beauty</p>
+      <h2 class="rq-q-h">What would you like<br>Rassin to help you discover?</h2>
+      <div class="rq-opts rq-col" data-q="beauty_intent" data-mode="multi">
+        <button class="rq-opt" data-val="skincare">SKINCARE <span class="rq-opt-sub">Build a routine that works for me.</span></button>
+        <button class="rq-opt" data-val="makeup">MAKEUP <span class="rq-opt-sub">Find products that suit me.</span></button>
+        <button class="rq-opt" data-val="haircare">HAIRCARE <span class="rq-opt-sub">Understand what my hair needs.</span></button>
+        <button class="rq-opt" data-val="fragrance">FRAGRANCE <span class="rq-opt-sub">Discover scents I'll love.</span></button>
+        <button class="rq-opt" data-val="overall">MY OVERALL BEAUTY <span class="rq-opt-sub">Create my complete beauty profile.</span></button>
+      </div>
+      <div class="rq-nav">
+        <button class="rq-back" onclick="rqGoTo('rq-q3')">← Back</button>
+        <button class="rq-next" id="rq-q4-next" onclick="rqGoTo('rq-q5')" disabled>Continue →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Q5: BEAUTY STYLE ───────────────────────────────────────────────── -->
+  <div class="rq-screen rq-q" id="rq-q5">
+    <div class="rq-q-img">
+      <img src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?auto=format&fit=crop&w=900&q=80" alt="">
+      <span class="rq-q-img-badge">05 / STYLE</span>
+    </div>
+    <div class="rq-q-r">
+      <div class="rq-stepper">
+        <span class="rq-step-no">05</span>
+        <div class="rq-step-track"><div class="rq-step-fill" style="width:100%"></div></div>
+        <span class="rq-step-of">05</span>
+      </div>
+      <p class="rq-q-eyebrow">05 / Your Style</p>
+      <h2 class="rq-q-h">How do you like<br>your beauty to feel?</h2>
+      <div class="rq-opts rq-opts-style" data-q="beauty_style" data-mode="single">
+        <div class="rq-opt-img" data-val="natural" onclick="rqImgSelect(this)">
+          <img src="https://images.unsplash.com/photo-1506863530036-1efeddceb993?auto=format&fit=crop&w=400&q=80" alt="">
+          <span class="rq-opt-img-label">NATURAL</span>
+        </div>
+        <div class="rq-opt-img" data-val="polished" onclick="rqImgSelect(this)">
+          <img src="https://images.unsplash.com/photo-1570213489059-0aac6626cade?auto=format&fit=crop&w=400&q=80" alt="">
+          <span class="rq-opt-img-label">POLISHED</span>
+        </div>
+        <div class="rq-opt-img" data-val="glamorous" onclick="rqImgSelect(this)">
+          <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=400&q=80" alt="">
+          <span class="rq-opt-img-label">GLAMOROUS</span>
+        </div>
+        <div class="rq-opt-img" data-val="minimal" onclick="rqImgSelect(this)">
+          <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=400&q=80" alt="">
+          <span class="rq-opt-img-label">MINIMAL</span>
+        </div>
+      </div>
+      <div class="rq-nav">
+        <button class="rq-back" onclick="rqGoTo('rq-q4')">← Back</button>
+        <button class="rq-next" id="rq-q5-next" onclick="rqComplete()" disabled>CREATE MY BEAUTY PROFILE →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── COMPLETION ────────────────────────────────────────────────────── -->
+  <div class="rq-screen rq-done" id="rq-done">
+    <div class="rq-done-loader" id="rq-loader"></div>
+    <p class="rq-done-eyebrow" id="rq-done-eyebrow">Building your profile</p>
+    <h2 class="rq-done-h" id="rq-done-h" style="opacity:0;transition:opacity .6s ease .3s;">Your Beauty<br>Profile Is Ready.</h2>
+    <p class="rq-done-body" id="rq-done-body" style="opacity:0;transition:opacity .6s ease .5s;">We've noted your preferences. Your personalised beauty experience is being shaped around you.</p>
+    <p class="rq-done-coming" id="rq-done-coming" style="opacity:0;transition:opacity .6s ease .7s;">Your full profile &amp; recommendations — coming soon.</p>
+  </div>
+
+</div>
+
+<script>
+(function(){
+  var rqEl = document.getElementById('rq');
+  var rqActive = null;
+  var rqResponses = {};
+
+  window.rqOpen = function(){
+    rqEl.classList.add('rq-open');
+    document.body.style.overflow = 'hidden';
+    rqGoTo('rq-intro');
+  };
+  window.rqClose = function(){
+    rqEl.classList.remove('rq-open');
+    document.body.style.overflow = '';
+    setTimeout(function(){
+      if(rqActive){ rqActive.classList.remove('rq-active','rq-exit'); }
+    }, 500);
+  };
+
+  window.rqGoTo = function(id){
+    var next = document.getElementById(id);
+    if(!next) return;
+    if(rqActive){
+      rqActive.classList.add('rq-exit');
+      rqActive.classList.remove('rq-active');
+      var old = rqActive;
+      setTimeout(function(){ old.classList.remove('rq-exit'); }, 450);
+    }
+    next.style.transform = 'translateX(48px)';
+    next.classList.add('rq-active');
+    setTimeout(function(){ next.style.transform = ''; }, 10);
+    rqActive = next;
+  };
+
+  // Text option selection
+  document.querySelectorAll('.rq-opts').forEach(function(grid){
+    grid.addEventListener('click', function(e){
+      var btn = e.target.closest('.rq-opt');
+      if(!btn) return;
+      var mode = grid.dataset.mode;
+      var maxSel = parseInt(grid.dataset.max) || 99;
+      var q = grid.dataset.q;
+
+      if(mode === 'single'){
+        grid.querySelectorAll('.rq-opt').forEach(function(b){ b.classList.remove('sel'); });
+        btn.classList.add('sel');
+        rqResponses[q] = btn.dataset.val;
+      } else {
+        if(btn.classList.contains('sel')){
+          btn.classList.remove('sel');
+        } else {
+          var cur = grid.querySelectorAll('.rq-opt.sel').length;
+          if(cur < maxSel){ btn.classList.add('sel'); }
+        }
+        var vals = [];
+        grid.querySelectorAll('.rq-opt.sel').forEach(function(b){ vals.push(b.dataset.val); });
+        rqResponses[q] = vals;
+      }
+      rqCheckNext(grid);
+    });
+  });
+
+  // Image option selection
+  window.rqImgSelect = function(el){
+    var grid = el.closest('[data-q]') || el.parentElement;
+    var mode = grid.dataset.mode || 'single';
+    var q = grid.dataset.q;
+    if(mode === 'single'){
+      grid.querySelectorAll('.rq-opt-img').forEach(function(i){ i.classList.remove('sel'); });
+      el.classList.add('sel');
+      rqResponses[q] = el.dataset.val;
+    }
+    rqCheckNext(grid);
+    // Also enable the NOT SURE button in Q3 (text opt in same grid)
+    var nextBtn = document.querySelector('#rq-q3-next');
+    if(nextBtn) nextBtn.disabled = false;
+  };
+
+  // Q3 not-sure text button
+  var q3TextOpt = document.querySelector('#rq-q3 .rq-opt');
+  if(q3TextOpt){
+    q3TextOpt.addEventListener('click', function(){
+      document.querySelectorAll('#rq-q3 .rq-opt-img').forEach(function(i){ i.classList.remove('sel'); });
+      rqResponses['hair_type'] = 'not_sure';
+      q3TextOpt.classList.add('sel');
+      var nb = document.getElementById('rq-q3-next');
+      if(nb) nb.disabled = false;
+    });
+  }
+
+  function rqCheckNext(grid){
+    var q = grid.dataset.q;
+    var screen = grid.closest('.rq-screen');
+    if(!screen) return;
+    var btn = screen.querySelector('.rq-next');
+    if(!btn) return;
+    var hasSel = grid.querySelector('.rq-opt.sel, .rq-opt-img.sel');
+    btn.disabled = !hasSel;
+  }
+
+  window.rqComplete = function(){
+    rqGoTo('rq-done');
+    // Animate: loader runs, then reveal text
+    setTimeout(function(){
+      var loader = document.getElementById('rq-loader');
+      var ey = document.getElementById('rq-done-eyebrow');
+      var h = document.getElementById('rq-done-h');
+      var b = document.getElementById('rq-done-body');
+      var c = document.getElementById('rq-done-coming');
+      if(loader) loader.style.display = 'none';
+      if(ey) ey.textContent = 'Done.';
+      if(h) h.style.opacity = '1';
+      if(b) b.style.opacity = '1';
+      if(c) c.style.opacity = '1';
+    }, 2200);
+  };
+
+  // ESC to close
+  document.addEventListener('keydown', function(e){
+    if(e.key === 'Escape' && rqEl.classList.contains('rq-open')) rqClose();
+  });
+})();
+</script>
+
 </body></html>
