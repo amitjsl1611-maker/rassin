@@ -1157,6 +1157,11 @@
 /* Style image cards */
 .rq-opts-style{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;}
 .rq-opts-style .rq-opt-img{aspect-ratio:2/3;}
+/* ── Q5 tab options */
+.rq-opts.rq-tabs{display:flex;flex-direction:row;flex-wrap:wrap;gap:10px;}
+.rq-tab{font-family:'Plus Jakarta Sans',sans-serif;font-size:12px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:#0A0A0A;background:#fff;border:1px solid #E0E0E0;padding:14px 32px;cursor:pointer;transition:border-color .15s,background .15s;}
+.rq-tab:hover{border-color:#AAAAAA;}
+.rq-tab.sel{background:#F0F0F0;border-color:#0A0A0A;}
 
 /* Nav */
 .rq-nav{display:flex;justify-content:space-between;align-items:center;padding-top:24px;margin-top:auto;}
@@ -1193,7 +1198,7 @@
     <div class="rq-intro-r">
       <h1 class="rq-intro-h">Let's get to<br>know you.</h1>
       <p class="rq-intro-body">A few simple questions to help us understand your skin, hair and beauty needs.</p>
-      <p class="rq-micro">4 questions &nbsp;·&nbsp; Less than a minute</p>
+      <p class="rq-micro">5 questions &nbsp;·&nbsp; Less than a minute</p>
       <button class="rq-begin" onclick="rqGoTo('rq-q1')">LET'S BEGIN <span>→</span></button>
     </div>
   </div>
@@ -1207,7 +1212,7 @@
     <div class="rq-q-r">
       <div class="rq-stepper">
         <span class="rq-step-no">01</span>
-        <div class="rq-step-track"><div class="rq-step-fill" style="width:25%"></div></div>
+        <div class="rq-step-track"><div class="rq-step-fill" style="width:20%"></div></div>
         <span class="rq-step-of">05</span>
       </div>
       <p class="rq-q-eyebrow">01 / Your Skin</p>
@@ -1236,7 +1241,7 @@
     <div class="rq-q-r">
       <div class="rq-stepper">
         <span class="rq-step-no">02</span>
-        <div class="rq-step-track"><div class="rq-step-fill" style="width:50%"></div></div>
+        <div class="rq-step-track"><div class="rq-step-fill" style="width:40%"></div></div>
         <span class="rq-step-of">05</span>
       </div>
       <p class="rq-q-eyebrow">02 / Your Skin</p>
@@ -1267,7 +1272,7 @@
     <div class="rq-q-r">
       <div class="rq-stepper">
         <span class="rq-step-no">03</span>
-        <div class="rq-step-track"><div class="rq-step-fill" style="width:75%"></div></div>
+        <div class="rq-step-track"><div class="rq-step-fill" style="width:60%"></div></div>
         <span class="rq-step-of">05</span>
       </div>
       <p class="rq-q-eyebrow">03 / Your Hair</p>
@@ -1307,11 +1312,11 @@
     <div class="rq-q-r">
       <div class="rq-stepper">
         <span class="rq-step-no">04</span>
-        <div class="rq-step-track"><div class="rq-step-fill" style="width:100%"></div></div>
+        <div class="rq-step-track"><div class="rq-step-fill" style="width:80%"></div></div>
         <span class="rq-step-of">05</span>
       </div>
       <p class="rq-q-eyebrow">04 / Your Beauty</p>
-      <h2 class="rq-q-h">Last question!<br>What would you like<br>Rassin to help you discover?</h2>
+      <h2 class="rq-q-h">What would you like<br>Rassin to help you discover?</h2>
       <div class="rq-opts rq-col" data-q="beauty_intent" data-mode="multi">
         <button class="rq-opt" data-val="skincare">SKINCARE <span class="rq-opt-sub">Build a routine that works for me.</span></button>
         <button class="rq-opt" data-val="makeup">MAKEUP <span class="rq-opt-sub">Find products that suit me.</span></button>
@@ -1321,11 +1326,37 @@
       </div>
       <div class="rq-nav">
         <button class="rq-back" onclick="rqGoTo('rq-q3')">← Back</button>
-        <button class="rq-next" id="rq-q4-next" onclick="rqComplete()" disabled>CREATE MY BEAUTY PROFILE →</button>
+        <button class="rq-next" id="rq-q4-next" onclick="rqGoTo('rq-q5')" disabled>Continue →</button>
       </div>
     </div>
   </div>
 
+  <!-- ── Q5: BEAUTY STYLE ───────────────────────────────────────────────── -->
+  <div class="rq-screen rq-q" id="rq-q5">
+    <div class="rq-q-img">
+      <img src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?auto=format&fit=crop&w=900&q=80" alt="">
+      <span class="rq-q-img-badge">05 / STYLE</span>
+    </div>
+    <div class="rq-q-r">
+      <div class="rq-stepper">
+        <span class="rq-step-no">05</span>
+        <div class="rq-step-track"><div class="rq-step-fill" style="width:100%"></div></div>
+        <span class="rq-step-of">05</span>
+      </div>
+      <p class="rq-q-eyebrow">05 / Your Style</p>
+      <h2 class="rq-q-h">How do you like<br>your beauty to feel?</h2>
+      <div class="rq-opts rq-tabs" data-q="beauty_style" data-mode="single">
+        <button class="rq-tab" data-val="natural">Natural</button>
+        <button class="rq-tab" data-val="polished">Polished</button>
+        <button class="rq-tab" data-val="glamorous">Glamorous</button>
+        <button class="rq-tab" data-val="minimal">Minimal</button>
+      </div>
+      <div class="rq-nav">
+        <button class="rq-back" onclick="rqGoTo('rq-q4')">← Back</button>
+        <button class="rq-next" id="rq-q5-next" onclick="rqComplete()" disabled>CREATE MY BEAUTY PROFILE →</button>
+      </div>
+    </div>
+  </div>
 
   <!-- ── COMPLETION ────────────────────────────────────────────────────── -->
   <div class="rq-screen rq-done" id="rq-done">
@@ -1453,6 +1484,19 @@
       if(c) c.style.opacity = '1';
     }, 2200);
   };
+
+  // Tab options (Q5 style)
+  document.querySelectorAll('.rq-tabs').forEach(function(grid){
+    grid.addEventListener('click', function(e){
+      var btn = e.target.closest('.rq-tab');
+      if(!btn) return;
+      grid.querySelectorAll('.rq-tab').forEach(function(b){ b.classList.remove('sel'); });
+      btn.classList.add('sel');
+      rqResponses[grid.dataset.q] = btn.dataset.val;
+      var screen = grid.closest('.rq-screen');
+      if(screen){ var nb = screen.querySelector('.rq-next'); if(nb) nb.disabled = false; }
+    });
+  });
 
   // ESC to close
   document.addEventListener('keydown', function(e){
