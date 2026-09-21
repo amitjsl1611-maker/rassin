@@ -56,6 +56,14 @@
     opacity: 0;
     transition: opacity 0.4s ease;
   }
+  .story-label-skin {
+    position: absolute;
+    left: calc(100% + 40px);
+    bottom: 0;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+  }
   .slr-title {
     font-family: 'Fira Sans Condensed', sans-serif;
     font-size: 36px;
@@ -798,6 +806,10 @@
       <div class="slr-title">MY HAIR</div>
       <div class="slr-sub">Know your hair.<br>Build a routine that fits.</div>
     </div>
+    <div class="story-label-skin">
+      <div class="slr-title">MY SKIN</div>
+      <div class="slr-sub">Understand your skin.<br>Find what works for you.</div>
+    </div>
   </div>
 </div>
   </div>
@@ -818,6 +830,7 @@
       var subtextHero = document.querySelector('.story-subtext-hero');
       var scrollHint = document.querySelector('.story-scroll-hint');
       var storyLabel = document.querySelector('.story-label-right');
+      var labelSkin = document.querySelector('.story-label-skin');
       var imgNext = document.querySelector('.story-img-next');
       var imgNext2 = document.querySelector('.story-img-next2');
       var _headTop = 0, _headHh = 0;
@@ -912,6 +925,15 @@
           var lOut = Math.max(0, Math.min(1, 1 - (rel - (viewportH + 50)) / 100));
           labelOp = Math.min(lIn, lOut);
           storyLabel.style.opacity = labelOp.toFixed(3);
+
+          // ── MY SKIN label: fades in as lavender wipe completes, out before green arrives
+          if (labelSkin) {
+            var slITop = _imgTopCache >= 0 ? _imgTopCache : (viewportH - IMG_H) / 2;
+            var slWipeDone = 2 * viewportH - slITop;
+            var slIn  = Math.max(0, Math.min(1, (rel - (slWipeDone - 150)) / 150));
+            var slOut = Math.max(0, Math.min(1, 1 - (rel - (2 * viewportH + 50)) / 100));
+            labelSkin.style.opacity = Math.min(slIn, slOut).toFixed(3);
+          }
         }
 
         // ── Image wipe: hair→skin tied to lavender slide's top edge
