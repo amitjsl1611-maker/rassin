@@ -111,8 +111,11 @@
     cursor: pointer;
     position: relative;
     white-space: nowrap;
-    pointer-events: all;
+    pointer-events: none;
   }
+  .story-label-right .slr-cta { color: #B03058; }
+  .story-label-skin .slr-cta { color: #7B3FA0; }
+  .story-label-beauty .slr-cta { color: #4A7A30; }
   .slr-cta::after {
     content: '';
     position: absolute;
@@ -975,6 +978,7 @@
           var lOut = Math.max(0, Math.min(1, 1 - (rel - (viewportH + 50)) / 100));
           labelOp = Math.min(lIn, lOut);
           storyLabel.style.opacity = labelOp.toFixed(3);
+          var _cta1 = storyLabel.querySelector('.slr-cta'); if(_cta1) _cta1.style.pointerEvents = labelOp > 0.05 ? 'all' : 'none';
 
           // ── MY SKIN label: fades in as lavender wipe completes, out before green arrives
           if (labelSkin) {
@@ -983,6 +987,7 @@
             var slIn  = Math.max(0, Math.min(1, (rel - (slWipeDone - 150)) / 150));
             var slOut = Math.max(0, Math.min(1, 1 - (rel - (2 * viewportH + 50)) / 100));
             labelSkin.style.opacity = Math.min(slIn, slOut).toFixed(3);
+            var _cta2 = labelSkin.querySelector('.slr-cta'); if(_cta2) _cta2.style.pointerEvents = Math.min(slIn, slOut) > 0.05 ? 'all' : 'none';
           }
 
           // ── MY BEAUTY label: fades in as green wipe completes, holds until end
@@ -992,6 +997,7 @@
             var blIn  = Math.max(0, Math.min(1, (rel - (blWipeDone - 150)) / 150));
             var blOut = Math.max(0, Math.min(1, 1 - (rel - (3 * viewportH + 50)) / 100));
             labelBeauty.style.opacity = Math.min(blIn, blOut).toFixed(3);
+            var _cta3 = labelBeauty.querySelector('.slr-cta'); if(_cta3) _cta3.style.pointerEvents = Math.min(blIn, blOut) > 0.05 ? 'all' : 'none';
           }
         }
 
