@@ -1133,6 +1133,7 @@
 .rq-opts.rq-grid-3{display:grid;grid-template-columns:repeat(3,1fr);}
 .rq-opts.rq-grid-2{display:grid;grid-template-columns:repeat(2,1fr);}
 .rq-opts.rq-col{flex-direction:column;gap:8px;}
+.rq-opts.rq-col .rq-opt{text-transform:none;letter-spacing:.02em;font-size:13px;padding:11px 16px 11px 42px;}
 
 /* Text option */
 .rq-opt{font-family:'Plus Jakarta Sans',sans-serif;font-size:11px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:#0A0A0A;background:#fff;border:1px solid #E0E0E0;padding:13px 16px 13px 42px;cursor:pointer;text-align:left;transition:border-color .15s,background .15s;display:flex;flex-direction:column;gap:5px;position:relative;}
@@ -1240,13 +1241,13 @@
       <p class="rq-q-eyebrow">02 / Your Skin</p>
       <h2 class="rq-q-h">What would you most<br>like to improve?</h2>
       <p class="rq-q-sub">Choose up to 3.</p>
-      <div class="rq-opts rq-grid-3" data-q="skin_goals" data-mode="multi" data-max="3">
-        <button class="rq-opt" data-val="glow">GLOW<span class="rq-opt-sub">Radiance &amp; luminosity</span></button>
-        <button class="rq-opt" data-val="hydration">HYDRATION<span class="rq-opt-sub">Moisture &amp; plumpness</span></button>
-        <button class="rq-opt" data-val="texture">TEXTURE<span class="rq-opt-sub">Smoothness &amp; tone</span></button>
-        <button class="rq-opt" data-val="dark_spots">DARK SPOTS<span class="rq-opt-sub">Uneven pigment</span></button>
-        <button class="rq-opt" data-val="breakouts">BREAKOUTS<span class="rq-opt-sub">Blemishes &amp; acne</span></button>
-        <button class="rq-opt" data-val="fine_lines">FINE LINES<span class="rq-opt-sub">Ageing &amp; firmness</span></button>
+      <div class="rq-opts rq-col" data-q="skin_goals" data-mode="multi" data-max="3">
+        <button class="rq-opt" data-val="glow">Glow &amp; radiance</button>
+        <button class="rq-opt" data-val="hydration">Hydration &amp; plumpness</button>
+        <button class="rq-opt" data-val="texture">Texture &amp; smoothness</button>
+        <button class="rq-opt" data-val="dark_spots">Dark spots &amp; pigmentation</button>
+        <button class="rq-opt" data-val="breakouts">Breakouts &amp; blemishes</button>
+        <button class="rq-opt" data-val="fine_lines">Fine lines &amp; firmness</button>
       </div>
       <div class="rq-nav">
         <button class="rq-back" onclick="rqGoTo('rq-q1')">← Back</button>
