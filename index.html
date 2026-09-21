@@ -1094,6 +1094,7 @@
 .rq-x:hover{opacity:1;}
 .rq-x svg{stroke:currentColor;}
 .rq-x svg{width:16px;height:16px;}
+.rq-done-active .rq-x{color:#0A0A0A;}
 
 /* ── INTRO ─────────────────────────────────────────────────────────────── */
 .rq-intro{background:#0A0A0A;}
@@ -1406,6 +1407,7 @@
     }
     next.classList.add('rq-active');
     rqActive = next;
+    rqEl.classList.toggle('rq-done-active', id === 'rq-done');
   };
 
   // Text option selection
