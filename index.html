@@ -1193,7 +1193,7 @@
     <div class="rq-intro-r">
       <h1 class="rq-intro-h">Let's get to<br>know you.</h1>
       <p class="rq-intro-body">A few simple questions to help us understand your skin, hair and beauty needs.</p>
-      <p class="rq-micro">5 questions &nbsp;·&nbsp; Less than a minute</p>
+      <p class="rq-micro">4 questions &nbsp;·&nbsp; Less than a minute</p>
       <button class="rq-begin" onclick="rqGoTo('rq-q1')">LET'S BEGIN <span>→</span></button>
     </div>
   </div>
@@ -1207,7 +1207,7 @@
     <div class="rq-q-r">
       <div class="rq-stepper">
         <span class="rq-step-no">01</span>
-        <div class="rq-step-track"><div class="rq-step-fill" style="width:20%"></div></div>
+        <div class="rq-step-track"><div class="rq-step-fill" style="width:25%"></div></div>
         <span class="rq-step-of">05</span>
       </div>
       <p class="rq-q-eyebrow">01 / Your Skin</p>
@@ -1236,7 +1236,7 @@
     <div class="rq-q-r">
       <div class="rq-stepper">
         <span class="rq-step-no">02</span>
-        <div class="rq-step-track"><div class="rq-step-fill" style="width:40%"></div></div>
+        <div class="rq-step-track"><div class="rq-step-fill" style="width:50%"></div></div>
         <span class="rq-step-of">05</span>
       </div>
       <p class="rq-q-eyebrow">02 / Your Skin</p>
@@ -1267,7 +1267,7 @@
     <div class="rq-q-r">
       <div class="rq-stepper">
         <span class="rq-step-no">03</span>
-        <div class="rq-step-track"><div class="rq-step-fill" style="width:60%"></div></div>
+        <div class="rq-step-track"><div class="rq-step-fill" style="width:75%"></div></div>
         <span class="rq-step-of">05</span>
       </div>
       <p class="rq-q-eyebrow">03 / Your Hair</p>
@@ -1307,11 +1307,11 @@
     <div class="rq-q-r">
       <div class="rq-stepper">
         <span class="rq-step-no">04</span>
-        <div class="rq-step-track"><div class="rq-step-fill" style="width:80%"></div></div>
+        <div class="rq-step-track"><div class="rq-step-fill" style="width:100%"></div></div>
         <span class="rq-step-of">05</span>
       </div>
       <p class="rq-q-eyebrow">04 / Your Beauty</p>
-      <h2 class="rq-q-h">What would you like<br>Rassin to help you discover?</h2>
+      <h2 class="rq-q-h">Last question!<br>What would you like<br>Rassin to help you discover?</h2>
       <div class="rq-opts rq-col" data-q="beauty_intent" data-mode="multi">
         <button class="rq-opt" data-val="skincare">SKINCARE <span class="rq-opt-sub">Build a routine that works for me.</span></button>
         <button class="rq-opt" data-val="makeup">MAKEUP <span class="rq-opt-sub">Find products that suit me.</span></button>
@@ -1321,49 +1321,11 @@
       </div>
       <div class="rq-nav">
         <button class="rq-back" onclick="rqGoTo('rq-q3')">← Back</button>
-        <button class="rq-next" id="rq-q4-next" onclick="rqGoTo('rq-q5')" disabled>Continue →</button>
+        <button class="rq-next" id="rq-q4-next" onclick="rqComplete()" disabled>CREATE MY BEAUTY PROFILE →</button>
       </div>
     </div>
   </div>
 
-  <!-- ── Q5: BEAUTY STYLE ───────────────────────────────────────────────── -->
-  <div class="rq-screen rq-q" id="rq-q5">
-    <div class="rq-q-img">
-      <img src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?auto=format&fit=crop&w=900&q=80" alt="">
-      <span class="rq-q-img-badge">05 / STYLE</span>
-    </div>
-    <div class="rq-q-r">
-      <div class="rq-stepper">
-        <span class="rq-step-no">05</span>
-        <div class="rq-step-track"><div class="rq-step-fill" style="width:100%"></div></div>
-        <span class="rq-step-of">05</span>
-      </div>
-      <p class="rq-q-eyebrow">05 / Your Style</p>
-      <h2 class="rq-q-h">How do you like<br>your beauty to feel?</h2>
-      <div class="rq-opts rq-opts-style" data-q="beauty_style" data-mode="single">
-        <div class="rq-opt-img" data-val="natural" onclick="rqImgSelect(this)">
-          <img src="https://images.unsplash.com/photo-1506863530036-1efeddceb993?auto=format&fit=crop&w=400&q=80" alt="">
-          <span class="rq-opt-img-label">NATURAL</span>
-        </div>
-        <div class="rq-opt-img" data-val="polished" onclick="rqImgSelect(this)">
-          <img src="https://images.unsplash.com/photo-1570213489059-0aac6626cade?auto=format&fit=crop&w=400&q=80" alt="">
-          <span class="rq-opt-img-label">POLISHED</span>
-        </div>
-        <div class="rq-opt-img" data-val="glamorous" onclick="rqImgSelect(this)">
-          <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=400&q=80" alt="">
-          <span class="rq-opt-img-label">GLAMOROUS</span>
-        </div>
-        <div class="rq-opt-img" data-val="minimal" onclick="rqImgSelect(this)">
-          <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=400&q=80" alt="">
-          <span class="rq-opt-img-label">MINIMAL</span>
-        </div>
-      </div>
-      <div class="rq-nav">
-        <button class="rq-back" onclick="rqGoTo('rq-q4')">← Back</button>
-        <button class="rq-next" id="rq-q5-next" onclick="rqComplete()" disabled>CREATE MY BEAUTY PROFILE →</button>
-      </div>
-    </div>
-  </div>
 
   <!-- ── COMPLETION ────────────────────────────────────────────────────── -->
   <div class="rq-screen rq-done" id="rq-done">
